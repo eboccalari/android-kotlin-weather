@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="main_server_error">Ocurrió un error en el servidor</string>
+    <string name="current_weather">Current Weather: %s</string>
 </resources>

@@ -1,6 +1,6 @@
 package com.github.eboccalari.weather.common.data
 
-import com.github.eboccalari.weather.common.entities.WeatherForecastEntity
+import com.github.eboccalari.weather.common.entities.WeatherBase
 import com.github.eboccalari.weather.common.utils.Constant
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,5 +14,5 @@ interface WeatherService {
         @Query(Constant.APP_ID_PARAM) appId: String,
         @Query(Constant.UNITS_PARAM) units: String,
         @Query(Constant.LANGUAGE_PARAM) lang: String
-    ): WeatherForecastEntity
+    ): WeatherBase
 }

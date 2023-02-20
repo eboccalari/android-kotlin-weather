@@ -30,7 +30,8 @@ android {
     }
 
     buildFeatures{
-        dataBinding true
+        //viewBinding true //ViewBinding
+        dataBinding true //Data Binding
     }
 
     kotlinOptions {

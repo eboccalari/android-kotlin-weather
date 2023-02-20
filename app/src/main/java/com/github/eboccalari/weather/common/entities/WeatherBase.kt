@@ -1,6 +1,7 @@
 package com.github.eboccalari.weather.common.entities
 
-open class WeatherBase(dateTime:Long,
-                  humidity: Int,
-                  temperature: Double,
-                  weather: List<Weather>)
+open class WeatherBase(val dt:Long,
+                  val timezone: Int,
+                  val name: String,
+                  val main: WeatherMain,
+                  val weather: List<Weather>)
