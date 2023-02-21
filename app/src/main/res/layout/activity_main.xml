@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.github.eboccalari.weather.common.utils.CommonUtils"/>
         <variable
             name="viewModel"
             type="com.github.eboccalari.weather.mainModule.viewmodel.MainViewModel" />
@@ -40,77 +39,38 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTimezone" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <include
+            android:id="@+id/item_weather"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:result="@{viewModel.result}"
+            app:isGone="@{!viewModel.loaded}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvCurrentTitle"
-            android:padding="@dimen/padding_min_default"
-            android:layout_margin="@dimen/margin_min_default">
+            layout="@layout/item_weather" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="230.52º F"
-                android:text="@{@string/weather_temp(viewModel.result.main.temp)}"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="?attr/colorSecondary"
-                android:layout_margin="@dimen/margin_min_default"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvForecastTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forecast_weather"
+            app:isGone="@{!viewModel.loaded}"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_weather" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvDatetime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="22:00"
-                android:text="@{@string/weather_dt(CommonUtils.INSTANCE.getHour(viewModel.result.dt))}"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvTemp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvHumidity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Humidity 65%"
-                android:text="@{@string/weather_humidity(viewModel.result.main.humidity)}"
-                android:textAppearance="?attr/textAppearanceCaption"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvDatetime" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvMain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Clouds"
-                android:text="@{CommonUtils.INSTANCE.getWeatherMain(viewModel.result.weather)}"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvTemp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Few clouds"
-                android:text="@{CommonUtils.INSTANCE.getWeatherDescription(viewModel.result.weather)}"
-                android:textAppearance="?attr/textAppearanceCaption"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvMain" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="@color/color_divider"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:listitem="@layout/item_weather"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvForecastTitle"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/loadingView"
@@ -120,8 +80,7 @@
             app:isGone="@{viewModel.loaded}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

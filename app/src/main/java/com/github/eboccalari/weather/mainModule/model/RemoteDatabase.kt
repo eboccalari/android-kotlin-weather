@@ -1,6 +1,7 @@
 package com.github.eboccalari.weather.mainModule.model
 
 import com.github.eboccalari.weather.common.data.WeatherService
+import com.github.eboccalari.weather.common.entities.ForecastBase
 import com.github.eboccalari.weather.common.entities.WeatherBase
 import com.github.eboccalari.weather.common.utils.Constant
 import kotlinx.coroutines.Dispatchers
@@ -18,8 +19,13 @@ class RemoteDatabase {
 
     private val weatherService = retrofit.create(WeatherService::class.java)
 
-    suspend fun getWeatherForecastByCoordinates(lat: Double, lon: Double, appId: String, units: String, lang: String) : WeatherBase =
+    suspend fun getCurrentWeatherByCoordinates(lat: Double, lon: Double, appId: String, units: String, lang: String) : WeatherBase =
         withContext(Dispatchers.IO){
-            weatherService.getWeatherForecastByCoordinadates(lat, lon, appId, units, lang)
+            weatherService.getWeatherByCoordinadates(lat, lon, appId, units, lang)
+        }
+
+    suspend fun getForecastWeatherByCoordinates(lat: Double, lon: Double, appId: String, units: String, lang: String) : ForecastBase =
+        withContext(Dispatchers.IO){
+            weatherService.getForecastByCoordinadates(lat, lon, appId, units, lang)
         }
 }

@@ -5,5 +5,6 @@
     <string name="weather_temp">%.2f ºC</string>
     <string name="weather_dt">Hour: %s</string>
     <string name="weather_humidity">Humidity %d%%</string>
+    <string name="forecast_weather">Weather Forecast</string>
 
 </resources>
